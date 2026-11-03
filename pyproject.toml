@@ -1,3 +1,6 @@
+[tool.vercel]
+entrypoint = "api.index:app"
+
 [project]
 name = "beyond-chatgpt"
 version = "0.1.0"
@@ -9,6 +12,7 @@ dependencies = [
     "jupyter>=1.1.1",
     "openai",
     "pydantic>=2.11.4",
+    "python-dotenv>=1.0.0",
     "uvicorn>=0.34.2",
     "python-multipart>=0.0.18",
 ]

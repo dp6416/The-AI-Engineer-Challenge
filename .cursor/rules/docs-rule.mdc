@@ -1,0 +1,15 @@
+---
+description: When building, configuring, running or deploying the Next.js frontend, or anything involving Vercel.
+alwaysApply: false
+---
+### Reference documentation
+
+Before writing or changing frontend or deployment code, consult the official docs rather than relying on memory, because APIs and defaults change between versions:
+
+- Next.js (App Router, routing, data fetching, env vars, next/font): https://nextjs.org/docs
+- Vercel (project setup, `vercel` CLI, environment variables, Python/FastAPI functions, `vercel.json`): https://vercel.com/docs
+
+Guidelines:
+- Use the current stable Next.js version and the App Router unless told otherwise.
+- If you are unsure about a config option, CLI flag or file convention, fetch and read the relevant docs page first, then cite the page you used in your reply.
+- The repo already has a `vercel.json` and a FastAPI backend in `/api`. Check the Vercel docs on Python functions before changing either, so the frontend and backend deploy together.

@@ -1,13 +1,54 @@
 ---
 description: When designing a frontend or frontend components.
-globs: 
 alwaysApply: false
 ---
 ### Rules for Frontend
 
 - You must pay attention to visual clarity and contrast. Do not place white text on a white background.
-- You must ensure the UX is pleasant. Boxes should grow to fit their contents, etc. 
+- You must ensure the UX is pleasant. Boxes should grow to fit their contents, etc.
 - When asking the user for sensitive information - you must use password style text-entry boxes in the UI.
-- You should use Next.js as it works best with Vercel. 
-- This frontend will ultimately be deployed on Vercel, but it should be possible to test locally. 
+- You should use Next.js as it works best with Vercel.
+- This frontend will ultimately be deployed on Vercel, but it should be possible to test locally.
 - Always provide users with a way to run the created UI once you have created it.
+
+### Theme: "Calm Coach"
+
+The backend is a supportive mental coach. The UI should feel calm, warm, safe and unhurried - like a quiet room, not a dashboard.
+
+Colour palette (use these as CSS variables / Tailwind theme tokens, do not invent new colours):
+- `--bg`            #F7F5F0  warm off-white page background
+- `--surface`       #FFFFFF  cards and the chat panel
+- `--primary`       #4A7560  sage green - primary buttons, links, focus rings
+- `--primary-hover` #3D6350  darker sage for hover/active states
+- `--accent`        #E8B4A0  soft peach - highlights, small decorative touches only
+- `--coach-bubble`  #E6EFEA  pale sage - background of coach (assistant) messages
+- `--user-bubble`   #4A7560  sage - background of user messages, with white text
+- `--text`          #2F3A35  deep green-charcoal - body text (never pure black)
+- `--text-muted`    #5E6D65  secondary text, timestamps, placeholders
+- `--border`        #DDE5E0  hairline borders and dividers
+- `--error`         #B04A40  muted red for errors (always paired with a text message, not colour alone)
+
+Typography:
+- Use a rounded, friendly sans-serif (e.g. "Nunito" or "Inter" via next/font). Body 16px minimum, line-height 1.6.
+- Headings in the same family, semi-bold, not shouty. No all-caps headings.
+
+Layout and feel:
+- Single centred chat column, max-width ~720px, generous padding and whitespace.
+- Rounded corners everywhere (cards 16px, bubbles 18px, buttons full pill).
+- Soft shadows only (e.g. 0 2px 12px rgba(47,58,53,0.06)). No harsh borders or heavy drop shadows.
+- Gentle transitions (150-250ms ease) on hover and when new messages appear. No bouncing or flashy animation; respect `prefers-reduced-motion`.
+- Show a calm "Coach is thinking..." indicator (three softly pulsing dots) while waiting for a reply.
+- Empty state: a short welcoming line such as "How are you feeling today?" plus 2-3 clickable starter prompts.
+- Auto-scroll to the newest message; the input stays pinned at the bottom. Enter sends, Shift+Enter adds a new line.
+- Fully responsive - must look good on a phone.
+
+Accessibility:
+- All text must meet WCAG AA contrast (4.5:1) against its background. White text is only allowed on `--primary` / `--user-bubble`.
+- Visible focus states using a 2px `--primary` ring. All controls keyboard reachable and labelled.
+
+### Backend integration
+
+- The backend is FastAPI in `/api/index.py`. It exposes `POST /api/chat` with JSON body `{ "message": string }` and returns `{ "reply": string }`.
+- Locally the backend runs at `http://localhost:8000`. Read the base URL from an env var (e.g. `NEXT_PUBLIC_API_URL`) defaulting to `http://localhost:8000` in development, and to a relative path (`/api/chat`) in production on Vercel.
+- Handle errors gracefully: if the request fails, show a friendly inline message in the chat ("Something went wrong reaching your coach - please try again") rather than crashing.
+- Never hard-code or log API keys in the frontend.

@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* Calm Coach palette — keep these tokens; do not invent extra colours. */
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --primary: #4a7560;
+  --primary-hover: #3d6350;
+  --accent: #e8b4a0;
+  --coach-bubble: #e6efea;
+  --user-bubble: #4a7560;
+  --text: #2f3a35;
+  --text-muted: #5e6d65;
+  --border: #dde5e0;
+  --error: #b04a40;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-coach-bubble: var(--coach-bubble);
+  --color-user-bubble: var(--user-bubble);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-error: var(--error);
+  --font-sans: var(--font-nunito);
+  --shadow-soft: 0 2px 12px rgba(47, 58, 53, 0.06);
+  --animate-fade-in: fade-in 200ms ease;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
