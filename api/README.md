@@ -1,12 +1,12 @@
-# OpenAI Chat API Backend
+# Groq Chat API Backend
 
-This is a FastAPI-based backend service that provides a chat interface using OpenAI's API. The service acts as a supportive mental coach, helping users with stress, motivation, habits, and confidence.
+This is a FastAPI-based backend service that provides a chat interface using the Groq API. The service acts as a supportive mental coach, helping users with stress, motivation, habits, and confidence.
 
 ## Prerequisites
 
 - [`uv`](https://github.com/astral-sh/uv) package manager (`pip install uv`)
 - `uv` will provision Python 3.12 automatically for this project, so no separate interpreter installation is required
-- An OpenAI API key available as the `OPENAI_API_KEY` environment variable when you run the server
+- A Groq API key available as the `GROQ_API_KEY` environment variable (or in a `.env` file at the repo root) when you run the server
 
 ## Setup
 
@@ -36,10 +36,10 @@ uv run uvicorn api.index:app --reload
 
 This runs the app with `uvicorn` on `http://localhost:8000` with auto-reload enabled for development. The server will automatically restart when you make changes to the code.
 
-**Note:** Make sure the `OPENAI_API_KEY` environment variable is set in your shell before launching the server. You can set it with:
+**Note:** Make sure the `GROQ_API_KEY` environment variable is set in your shell before launching the server. You can set it with:
 
 ```bash
-export OPENAI_API_KEY=sk-your-key-here
+export GROQ_API_KEY=gsk_your-key-here
 ```
 
 If you encounter an "Address already in use" error, you may need to kill existing processes on port 8000:
@@ -66,7 +66,7 @@ lsof -ti:8000 | xargs kill -9
 }
 ```
 
-The chat endpoint uses OpenAI's GPT-5 model with a supportive mental coach system prompt to provide helpful responses.
+The chat endpoint uses the `qwen/qwen3.8-27b` model (served by Groq) with a supportive mental coach system prompt to provide helpful responses.
 
 ### Root Endpoint
 - **URL**: `/`
@@ -92,7 +92,7 @@ The API is configured to accept requests from any origin (`*`). This can be modi
 
 The API includes basic error handling for:
 - Invalid API keys
-- OpenAI API errors
+- Groq API errors
 - General server errors
 
 All errors will return a 500 status code with an error message.

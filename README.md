@@ -75,7 +75,7 @@ Got everything in place? Let's move on!
 
 1. Install the [`uv`](https://github.com/astral-sh/uv) package manager (`pip install uv`). `uv` will download and manage Python 3.12 for you the first time you run a project command.
 2. From the project root, install dependencies with `uv sync`. This creates `.venv/` (and fetches Python 3.12 automatically if needed).
-3. Set your OpenAI API key in the shell before running the server, for example `export OPENAI_API_KEY=sk-...`.
+3. Set your Groq API key in the shell before running the server, for example `export GROQ_API_KEY=gsk_...` (or put it in a `.env` file at the project root).
 4. Start the backend directly from the project root with `uv run uvicorn api.index:app --reload`. The server will run on `http://localhost:8000` with auto-reload enabled for development.
 5. Additional backend details live in `api/README.md`.
 
@@ -183,7 +183,7 @@ Here's a template to get your post started!
 ```
 🚀🎉 Exciting News! 🎉🚀
 
-🏗️ Today, I'm thrilled to announce that I've successfully built and shipped my first-ever LLM using the powerful combination of , and the OpenAI API! 🖥️
+🏗️ Today, I'm thrilled to announce that I've successfully built and shipped my first-ever LLM using the powerful combination of , and the Groq API! 🖥️
 
 Check it out 👇
 [LINK TO APP]

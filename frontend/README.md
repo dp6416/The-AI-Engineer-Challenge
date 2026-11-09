@@ -10,7 +10,7 @@ The UI posts `{ "message": "..." }` to `POST /api/chat` and expects `{ "reply": 
 - **Local:** `http://localhost:8000/api/chat` (set via `NEXT_PUBLIC_API_URL` in `.env.development`)
 - **Vercel:** same-origin `/api/chat` (blank `NEXT_PUBLIC_API_URL` in `.env.production`)
 
-Never put an OpenAI key in this folder. The backend already holds that secret.
+Never put a Groq API key in this folder. The backend already holds that secret.
 
 ## Run it locally
 
@@ -21,7 +21,7 @@ You need **two terminals**. Node 20.9+ for the frontend, and `uv` for the Python
 ```bash
 uv sync
 # Windows PowerShell:
-$env:OPENAI_API_KEY="sk-..."
+$env:GROQ_API_KEY="gsk_..."
 uv run uvicorn api.index:app --reload
 ```
 
@@ -43,4 +43,4 @@ Open [http://localhost:3000](http://localhost:3000). Type a check-in, hit Enter 
 
 ## Deploying with the API
 
-The root `vercel.json` uses [Vercel Services](https://vercel.com/docs/services): Next.js in `frontend/`, FastAPI from `api.index:app`. Public `/api/*` goes to Python; everything else goes to this UI. Set `OPENAI_API_KEY` in the Vercel project, then `vercel` from the repo root.
+The root `vercel.json` uses [Vercel Services](https://vercel.com/docs/services): Next.js in `frontend/`, FastAPI from `api.index:app`. Public `/api/*` goes to Python; everything else goes to this UI. Set `GROQ_API_KEY` in the Vercel project, then `vercel` from the repo root.

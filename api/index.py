@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from openai import OpenAI
+from groq import Groq
 import os
 from dotenv import load_dotenv
 
@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 class ChatRequest(BaseModel):
     message: str
@@ -28,13 +28,13 @@ def root():
 
 @app.post("/api/chat")
 def chat(request: ChatRequest):
-    if not os.getenv("OPENAI_API_KEY"):
-        raise HTTPException(status_code=500, detail="OPENAI_API_KEY not configured")
+    if not os.getenv("GROQ_API_KEY"):
+        raise HTTPException(status_code=500, detail="GROQ_API_KEY not configured")
     
     try:
         user_message = request.message
         response = client.chat.completions.create(
-            model="gpt-5",
+            model="qwen/qwen3.8-27b",
             messages=[
                 {"role": "system", "content": "You are a supportive mental coach."},
                 {"role": "user", "content": user_message}
@@ -42,4 +42,4 @@ def chat(request: ChatRequest):
         )
         return {"reply": response.choices[0].message.content}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error calling OpenAI API: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error calling Groq API: {str(e)}")
