@@ -126,6 +126,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.venvignore #vercel ignore files
 env/
 venv/
 ENV/
